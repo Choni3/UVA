@@ -25,6 +25,7 @@ void adda(char c, int posi) {
     awa += c;
     
     int p = upper_bound(all(agregar), posi) - agregar.begin();
+    //cout << c << " " << posi << "\n";
     //cout << c << " " << posi + p << "\n";
     s.insert(posi + p, awa);
 }
@@ -38,8 +39,7 @@ void recon(int p1, int p2) {
         recon(p1, p2 - 1);
     }
     else if(tipo[p1][p2] == 1) {
-        adda(letra[p1][p2], p2 - 1);
-        agregar.pb(p2 - 1);
+        adda(letra[p1][p2], p2 + 1);
         recon(p1 + 1, p2);
     }
     else {
@@ -53,7 +53,7 @@ int dpp(int p1, int p2) {
         tipo[p1][p2] = 2;  
         return dp[p1][p2] = dpp(p1 + 1, p2 - 1);
     }
-    if(dpp(p1 + 1, p2) < dpp(p1, p2 - 1)) {
+    if(dpp(p1 + 1, p2) <= dpp(p1, p2 - 1)) {
         tipo[p1][p2] = 1;
         letra[p1][p2] = s[p1];
         
